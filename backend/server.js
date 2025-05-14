@@ -14,7 +14,7 @@ const port = isProduction ? (process.env.PORT || 80) : 4000;
 const allowedOrigins = [
     'https://user-management-system-angular-tm8z.vercel.app',
     'https://user-management-system-angular.vercel.app',
-    'https://user-management-system-angular-froillan123.vercel.app',
+    'https://user-management-system-pn5a.vercel.app',
     'http://localhost:4200',
     'http://localhost:3000',
     'http://127.0.0.1:4200'
