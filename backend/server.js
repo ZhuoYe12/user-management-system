@@ -12,15 +12,10 @@ const http = require('http');
 const isProduction = process.env.NODE_ENV === 'production';
 const port = isProduction ? (process.env.PORT || 80) : 4000;
 const allowedOrigins = [
-    // Vercel URLs
-    'https://user-management-system-angular-tm8z.vercel.app',
+   'https://user-management-system-angular-tm8z.vercel.app',
     'https://user-management-system-angular.vercel.app',
     'https://user-management-system-angular-froillan123.vercel.app',
     'https://user-management-system-pn5a.vercel.app',
-    // Render URLs
-    'https://user-management-system-1-h9ik.onrender.com',
-    'https://user-management-system-angular.onrender.com',
-    // Railway URLs
     'https://user-management-system-production.up.railway.app',
     // Local development URLs
     'http://localhost:4200',
@@ -83,11 +78,6 @@ try {
     const accountsController = require('./accounts/accounts.controller');
     app.use('/accounts', accountsController);
     console.log('Accounts controller loaded successfully');
-    
-    console.log('Loading analytics controller...');
-    const analyticsController = require('./accounts/analytics.controller');
-    app.use('/accounts/analytics', analyticsController);
-    console.log('Analytics controller loaded successfully');
 } catch (error) {
     console.error('Error loading controllers:', error);
     process.exit(1);
@@ -104,28 +94,9 @@ app.use(errorHandler);
 // Create HTTP server
 const server = http.createServer(app);
 
-// Initialize Socket.IO with safeguards
-try {
-    console.log('Initializing Socket.IO...');
-    const socketModule = require('./_helpers/socket');
-    socketModule.init(server);
-    console.log('Socket.IO initialized successfully');
-} catch (error) {
-    console.error('Error initializing Socket.IO:', error);
-}
-
-// Check for path-to-regexp version
-try {
-    const pathToRegexp = require('path-to-regexp');
-    console.log('path-to-regexp version:', require('path-to-regexp/package.json').version);
-} catch (error) {
-    console.error('Could not determine path-to-regexp version:', error.message);
-}
-
 // Log environment information
 console.log(`Server running in ${isProduction ? 'PRODUCTION' : 'DEVELOPMENT'} mode`);
 console.log(`Server listening on port ${port}`);
 console.log(`API Documentation temporarily disabled`);
-console.log(`WebSocket server initialized`);
 
 server.listen(port);
